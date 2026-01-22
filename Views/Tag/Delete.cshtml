@@ -1,0 +1,11 @@
+﻿@model PortalNoticias.Models.Tag
+
+<h2>Excluir Tag</h2>
+
+<p>Deseja realmente excluir a tag <strong>@Model.Descricao</strong>?</p>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit">Confirmar</button>
+    <a asp-action="Index">Cancelar</a>
+</form>

@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Seja bem-vindo(a) ao Portal de Notícias</h1>
+</div>
+
+<div>
+    <a asp-controller="Tag" asp-action="Index">
+        <button style="margin: 0 15px;">Gerenciar Tags</button>
+    </a>
+
+    <a asp-controller="Noticia" asp-action="Index">
+        <button style="margin: 0 15px;">Gerenciar Notícias</button>
+    </a>
+</div>

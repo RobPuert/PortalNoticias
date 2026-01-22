@@ -1,0 +1,13 @@
+﻿@model PortalNoticias.Models.Tag
+
+<h2>Editar Tag</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <label asp-for="Descricao"></label>
+    <input asp-for="Descricao" />
+    <span asp-validation-for="Descricao"></span>
+
+    <button type="submit">Salvar</button>
+</form>

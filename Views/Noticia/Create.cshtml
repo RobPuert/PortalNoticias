@@ -1,0 +1,62 @@
+﻿@model PortalNoticias.ViewModels.NoticiaViewModel
+@{
+    Layout = null;
+}
+
+<h2>Nova Notícia</h2>
+
+<form id="formNoticia">
+    <div>
+        <label>Título</label>
+        <input asp-for="Titulo" />
+    </div>
+
+    <div>
+        <label>Texto</label>
+        <textarea asp-for="Texto"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label>Tags</label>
+
+        <div>
+            @foreach (var tag in ViewBag.Tags) {
+                var marcado = Model?.TagIds?.Contains(tag.Id) == true;
+
+                <div class="form-check">
+                    <input class="form-check-input"
+                           type="checkbox"
+                           name="TagIds"
+                           value="@tag.Id"
+                           @(marcado ? "checked" : "") />
+
+                    <label class="form-check-label">
+                        @tag.Descricao
+                    </label>
+                </div>
+            }
+        </div>
+    </div>
+
+    <button type="submit">Salvar</button>
+</form>
+
+<script>
+$(function () {
+
+    $("#formNoticia").on("submit", function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            url: "/Noticia/Create",
+            type: "POST",
+            data: $(this).serialize(),
+            success: function () {
+                alert("Notícia cadastrada com sucesso!");
+                window.location.href = "/Noticia";
+            }
+        });
+    });
+
+});
+</script>

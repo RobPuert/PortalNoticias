@@ -1,0 +1,92 @@
+﻿@model IEnumerable<PortalNoticias.Models.Noticia>
+
+<h2>Notícias</h2>
+
+<button id="btnNovaNoticia">Nova Notícia</button>
+
+<table>
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th>Tags</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var noticia in Model) {
+            <tr>
+                <td>@noticia.Titulo</td>
+                <td>
+                    @string.Join(", ",
+                    noticia.NoticiaTags.Select(nt => nt.Tag.Descricao))
+            </td>
+            <td>
+                <button class="btnEditar" data-id="@noticia.Id">Editar</button> |
+                <a asp-action="Delete" asp-route-id="@noticia.Id"
+                   class="btn btn-sm btn-danger">
+                    Excluir
+                </a>
+
+            </td>
+        </tr>
+                }
+    </tbody>
+</table>
+
+<div id="form-container"></div>
+
+<div id="modal"></div>
+
+<script>
+    let formAberto = null; // "create" | "edit"
+    let editIdAberto = null;
+
+    function fecharForm() {
+        $("#form-container").empty();
+        formAberto = null;
+        editIdAberto = null;
+    }
+
+    $("#btnNovaNoticia").click(function () {
+
+        if (formAberto === "create") {
+            fecharForm();
+            return;
+        }
+
+        $.get("/Noticia/Create", function (html) {
+            $("#form-container").html(html);
+            formAberto = "create";
+            editIdAberto = null;
+        });
+    });
+
+    $(document).on("click", ".btnEditar", function () {
+
+        let id = $(this).data("id");
+
+        if (formAberto === "edit" && editIdAberto === id) {
+            fecharForm();
+            return;
+        }
+
+        $.get("/Noticia/Edit/" + id, function (html) {
+            $("#form-container").html(html);
+            formAberto = "edit";
+            editIdAberto = id;
+        });
+    });
+</script>
+
+<style>
+    #form-container {
+        margin-top: 20px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        background-color: #fafafa;
+    }
+
+    button {
+        cursor: pointer;
+    }
+</style>

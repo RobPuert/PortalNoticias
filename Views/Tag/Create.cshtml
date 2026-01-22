@@ -1,0 +1,8 @@
+﻿@model PortalNoticias.Models.Tag
+
+<form asp-action="Create" method="post">
+    <label asp-for="Descricao"></label>
+    <input asp-for="Descricao" />
+    <span asp-validation-for="Descricao"></span>
+    <button type="submit">Salvar</button>
+</form>

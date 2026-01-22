@@ -1,0 +1,20 @@
+﻿1) Qual fluxo os dados de um formulário em uma View deve percorrer até ser armazenado na fonte de dados em um projeto DDD?
+
+No caso de um projeto DDD, os dados chegam na View passam para a Controller (que nesse caso funciona como uma camada de entrada da aplicação). O Controller valida os dados
+e passa para a camada de Aplicação. A camada de Aplicação organiza os métodos e chama o domínio (onde ficam as regras de negócio). Depois, geralmente chega na repository 
+e de lá armazena os dados no banco (que é a fonte de dados).
+Em resumo: View → Controller → Application Service → Domain → Repository → Database.
+
+
+2) Nossa aplicação necessita que um usuário esteja autenticado para poder navegar nas funcionalidades, em .NET, como podemos desenvolver essa autenticação?
+
+PAra implementar autenticação em .NET eu usaria JWT. O processo seria: configurar o middleware de autenticação, definir o esquema de autenticação, proteger rotas
+com o atributo [Authorize] e validar as credenciais do usuário no momento do login (e a cada requisição que for necessário autenticar).
+
+
+3) Estamos enfrentando problemas de performance na página inicial de um portal que tem muitos acessos. Essa página exibe eventos separados em 6 sessões do HTML, filtrados
+por regras de negócio distintas, realizando 6 consultas via ORM. O que podemos fazer para mitigar esse problema?
+
+Para resolver problemas de performance, podemos reduzir a quantidade de consultas ao banco e/ou fazer uma consulta só mais abrangente (quando for o caso).
+Também daria para otimizar as consultas (os SELECTS) para evitar ficar carregando as entidades toda hora. Dá para utilizar índices no banco de dados e verificar a possibilidade
+de executar as consultas de forma assíncrona e paralela.
