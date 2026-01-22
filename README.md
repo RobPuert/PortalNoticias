@@ -81,5 +81,5 @@ A aplicação permite o gerenciamento de entidades básicas (Tag e Noticias) com
 
 ## Autor:
 Robson F. Puert
-https://www.linkedin.com/in/robson-puert-3973281bb/
-https://github.com/RobPuert
+- https://www.linkedin.com/in/robson-puert-3973281bb/
+- https://github.com/RobPuert
